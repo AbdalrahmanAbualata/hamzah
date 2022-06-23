@@ -11,23 +11,39 @@ public class telnetUsingSocket {
         Socket pingSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-
         try {
+
+           // create socket 
             pingSocket = new Socket("telehack.com", 23);
+            // create output Strem to send data to server 
             out = new PrintWriter(pingSocket.getOutputStream(), true);
+            // create input stream to get the response from the server 
             in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
+
+            // close the socket after spacefic time 
             pingSocket.setSoTimeout(10000);
+
+
+            // sleep for a 1 sec 
+
             Thread.sleep(2000);
+
+            // print the response from the server 
             telnetUsingSocket.read(in);
+
             // System.out.println("Sending username");
+
+          
             Thread.sleep(2000);
+
+            // print a commend in cmd for the host server using outputStream 
             out.println("weather");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             telnetUsingSocket.read(in);
             out.println("host");
             out.flush();
             Thread.sleep(2000);
-            telnetUsingSocket.read2(in);  // Always blocks here
+            telnetUsingSocket.read2(in); 
             // System.out.println("Sending password");
             // out.println("password");
             // telnetUsingSocket.read(in);
@@ -35,6 +51,7 @@ public class telnetUsingSocket {
             in.close();
             out.close();
             pingSocket.close();
+            
         } catch (IOException e) {
             return;
         }
